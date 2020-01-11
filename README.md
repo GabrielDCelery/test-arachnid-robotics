@@ -1,6 +1,19 @@
 # test-arachnid-robotics
 
-A multi part challenge of navigating remotely controlled spiders in a test chamber
+A multi part challenge of navigating remotely controlled spiders on a test surface
+
+## How do the spiders work
+
+A robot spider has `setter` methods for the followings
+
+- Version of robot (`mk1`, `mk2`)
+- Surface it is navigating
+
+A robot spider has the following Classes that control its behaviour
+
+- Command interpreter - it converts the provided input string to commands that the spider understands
+- Command validator - checks if moving to a location on the surface is safe
+- State manager - converts the commands to coordinates and vectors to manage the robot's movement to neighbouring coordinates and the direction it is facing
 
 ## Project folder structure
 
