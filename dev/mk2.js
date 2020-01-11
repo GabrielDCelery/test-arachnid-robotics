@@ -1,11 +1,12 @@
 const run = require('../src/run');
 
 const result1 = run({
-  testChamber: {
-    sizeX: 10,
-    sizeY: 10
+  testSurface: {
+    sizeX: 20,
+    sizeY: 20
   },
   robot: {
+    version: 'mk2',
     inputString: '0,0,FRFRFFFFFFFLLLLFFFFFRFFFFLFFLRRF'
   }
 });
@@ -13,11 +14,12 @@ const result1 = run({
 console.log(`The robot is at ${JSON.stringify(result1)}`);
 
 const result2 = run({
-  testChamber: {
-    sizeX: 10,
-    sizeY: 10
+  testSurface: {
+    sizeX: 20,
+    sizeY: 20
   },
   robot: {
+    version: 'mk2',
     inputString: '3,6,FFFFFFFFRRRRRRRFFFFLLLBBRRRRRLLLLLLLLLRFFF'
   }
 });
@@ -25,11 +27,12 @@ const result2 = run({
 console.log(`The robot is at ${JSON.stringify(result2)}`);
 
 const result3 = run({
-  testChamber: {
-    sizeX: 10,
-    sizeY: 10
+  testSurface: {
+    sizeX: 20,
+    sizeY: 20
   },
   robot: {
+    version: 'mk2',
     inputString: '0,7,RRRRRRRRFFFFFFFFFFFLLLBBBBBRRRLLLLLFFLR'
   }
 });

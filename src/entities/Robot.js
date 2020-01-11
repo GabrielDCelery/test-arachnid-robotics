@@ -1,70 +1,61 @@
-const { FORWARDS, BACKWARDS, LEFT, RIGHT } = require('../constants');
+const RobotState = require('./RobotState');
+const RobotCommandValidator = require('./RobotCommandValidator');
+const RobotCommandInterpreter = require('./RobotCommandInterpreter');
+const Grid = require('./Grid');
 
 class Robot {
   constructor() {
-    this.x = null;
-    this.y = null;
-    this.testChamber = null;
-  }
-
-  static get COMMANDS_TO_DIRECTIONS() {
-    return {
-      F: FORWARDS,
-      B: BACKWARDS,
-      L: LEFT,
-      R: RIGHT
-    };
+    this.state = RobotState.createInstance();
+    this.commandInterpreter = RobotCommandInterpreter.createInstance();
+    this.commandValidator = RobotCommandValidator.createInstance();
   }
 
   static createInstance() {
     return new Robot();
   }
 
-  _interpretInputString(inputString) {
-    const [x, y, commandSequence] = inputString.split(',');
-
-    return {
-      x: parseInt(x),
-      y: parseInt(y),
-      commandSequence
-    };
-  }
-
-  _setLocation({ x, y }) {
-    this.x = x;
-    this.y = y;
-  }
-
-  _processCommandSequence(commandSequence) {
-    for (let i = 0, iMax = commandSequence.length; i < iMax; i++) {
-      const command = commandSequence[i];
-      const direction = Robot.COMMANDS_TO_DIRECTIONS[command];
-      const { x, y } = this.testChamber.getCoordinatesTowardsDirection({
-        x: this.x,
-        y: this.y,
-        direction
-      });
-      this._setLocation({ x, y });
-    }
-  }
-
-  setTestChamber(testChamber) {
-    this.testChamber = testChamber;
+  setVersion(version) {
+    this.commandInterpreter.setVersion(version);
+    this.commandValidator.setVersion(version);
 
     return this;
   }
 
-  getCurrentLocation() {
-    return {
-      x: this.x,
-      y: this.y
-    };
+  setSurface({ sizeX, sizeY }) {
+    const grid = Grid.createInstance({ sizeX, sizeY });
+    this.commandValidator.setGrid(grid);
+
+    return this;
+  }
+
+  getCoordinates() {
+    return this.state.getCoordinates();
   }
 
   processInput(inputString) {
-    const { x, y, commandSequence } = this._interpretInputString(inputString);
-    this._setLocation({ x, y });
-    this._processCommandSequence(commandSequence);
+    const {
+      x,
+      y,
+      commandInputs
+    } = this.commandInterpreter.interpretInputString(inputString);
+    this.state.setCoordinates({ x, y }).setDirection({});
+
+    commandInputs.forEach(commandInput => {
+      const commands = this.commandInterpreter.transformInputToCommands(
+        commandInput
+      );
+
+      commands.forEach(command => {
+        const { coordinates, direction } = this.state.getNewState({ command });
+        const bIsSafe = this.commandValidator.areCoordinatesSafe(coordinates);
+
+        if (!bIsSafe) {
+          return;
+        }
+
+        this.state.setCoordinates(coordinates).setDirection(direction);
+      });
+    });
 
     return this;
   }

@@ -1,5 +1,5 @@
-const directions = require('./directions');
+const commands = require('./commands');
 
 module.exports = {
-  ...directions
+  ...commands
 };
