@@ -11,12 +11,25 @@ A multi part challenge of navigating remotely controlled spiders in a test chamb
 | src/entities      | Entity classes for the application                         |
 | src/run           | entrypoint for running the application                     |
 | Makefile          | Entrypoint scripts                                         |
+| tests             | test scripts                                               |
+
+### Setup project
+
+have Node.js installed on your machine
+run the following commands
+
+```
+npm install
+```
 
 ### to run Part 1
 
-have Node.js installed on your machine
-run the following command
+```
+make mk1
+```
+
+### to run Part 2
 
 ```
-make part1
+make mk2
 ```
