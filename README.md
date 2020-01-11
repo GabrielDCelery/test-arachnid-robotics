@@ -4,10 +4,12 @@ A multi part challenge of navigating remotely controlled spiders on a test surfa
 
 ## How do the spiders work
 
-A robot spider has `setter` methods for the followings
+A robot spider has the following public methods
 
-- Version of robot (`mk1`, `mk2`)
-- Surface it is navigating
+- A setter for versioning the robot (`mk1`, `mk2`)
+- A setter for the surface it is navigating
+- A `processInput` method to process the command string provided
+- A `getCoordinates` method to return its location
 
 A robot spider has the following Classes that control its behaviour
 
