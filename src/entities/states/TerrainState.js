@@ -1,5 +1,5 @@
-class Grid {
-  constructor({ sizeX, sizeY }) {
+class TerrainState {
+  setSize({ sizeX, sizeY }) {
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.boundaries = {
@@ -8,10 +8,6 @@ class Grid {
       right: this.sizeX - 1,
       bottom: 0
     };
-  }
-
-  static createInstance({ sizeX, sizeY }) {
-    return new Grid({ sizeX, sizeY });
   }
 
   areCoordinatesInsideBoundaries({ x, y }) {
@@ -24,4 +20,4 @@ class Grid {
   }
 }
 
-module.exports = Grid;
+module.exports = TerrainState;
