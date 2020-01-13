@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const RobotState = require('../../../src/entities/RobotState');
+const { graph } = require('../../../src/helpers');
 
 module.exports = () => {
   describe('static _rotateVector({ x, y, degrees })', () => {
@@ -14,10 +14,10 @@ module.exports = () => {
       const args4 = { x: -1, y: 0, degrees: 90 };
 
       // When
-      const result1 = RobotState._rotateVector(args1);
-      const result2 = RobotState._rotateVector(args2);
-      const result3 = RobotState._rotateVector(args3);
-      const result4 = RobotState._rotateVector(args4);
+      const result1 = graph.rotateVector(args1);
+      const result2 = graph.rotateVector(args2);
+      const result3 = graph.rotateVector(args3);
+      const result4 = graph.rotateVector(args4);
 
       //Then
       expect(result1).to.deep.equal({ x: -1, y: 0 });
@@ -34,10 +34,10 @@ module.exports = () => {
       const args4 = { x: -1, y: 0, degrees: -90 };
 
       // When
-      const result1 = RobotState._rotateVector(args1);
-      const result2 = RobotState._rotateVector(args2);
-      const result3 = RobotState._rotateVector(args3);
-      const result4 = RobotState._rotateVector(args4);
+      const result1 = graph.rotateVector(args1);
+      const result2 = graph.rotateVector(args2);
+      const result3 = graph.rotateVector(args3);
+      const result4 = graph.rotateVector(args4);
 
       //Then
       expect(result1).to.deep.equal({ x: 1, y: 0 });
@@ -55,11 +55,11 @@ module.exports = () => {
       const args5 = { x: 0, y: 1, degrees: -180 };
 
       // When
-      const result1 = RobotState._rotateVector(args1);
-      const result2 = RobotState._rotateVector(args2);
-      const result3 = RobotState._rotateVector(args3);
-      const result4 = RobotState._rotateVector(args4);
-      const result5 = RobotState._rotateVector(args5);
+      const result1 = graph.rotateVector(args1);
+      const result2 = graph.rotateVector(args2);
+      const result3 = graph.rotateVector(args3);
+      const result4 = graph.rotateVector(args4);
+      const result5 = graph.rotateVector(args5);
 
       //Then
       expect(result1).to.deep.equal({ x: 0, y: -1 });
@@ -78,10 +78,10 @@ module.exports = () => {
       const args4 = { x: -1, y: 0, degrees: 0 };
 
       // When
-      const result1 = RobotState._rotateVector(args1);
-      const result2 = RobotState._rotateVector(args2);
-      const result3 = RobotState._rotateVector(args3);
-      const result4 = RobotState._rotateVector(args4);
+      const result1 = graph.rotateVector(args1);
+      const result2 = graph.rotateVector(args2);
+      const result3 = graph.rotateVector(args3);
+      const result4 = graph.rotateVector(args4);
 
       //Then
       expect(result1).to.deep.equal({ x: 0, y: 1 });

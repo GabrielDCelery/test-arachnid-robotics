@@ -1,7 +1,7 @@
 const run = require('../src/run');
 
 const result1 = run({
-  testSurface: {
+  terrain: {
     sizeX: 20,
     sizeY: 20
   },
@@ -14,7 +14,7 @@ const result1 = run({
 console.log(`The robot is at ${JSON.stringify(result1)}`);
 
 const result2 = run({
-  testSurface: {
+  terrain: {
     sizeX: 20,
     sizeY: 20
   },
@@ -27,7 +27,7 @@ const result2 = run({
 console.log(`The robot is at ${JSON.stringify(result2)}`);
 
 const result3 = run({
-  testSurface: {
+  terrain: {
     sizeX: 20,
     sizeY: 20
   },

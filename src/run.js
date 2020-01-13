@@ -1,9 +1,9 @@
-const Robot = require('./entities/Robot');
+const App = require('./entities/App');
 
 const run = processConfig => {
-  return Robot.createInstance()
+  return App.createInstance()
     .setVersion(processConfig['robot']['version'])
-    .setSurface(processConfig['testSurface'])
+    .setTerrain(processConfig['terrain'])
     .processInput(processConfig['robot']['inputString'])
     .getCoordinates();
 };
