@@ -1,4 +1,4 @@
-const versions = require('./versions');
+const versions = require('../versions');
 const AI = require('./AI');
 const CommandsFactory = require('./commands/CommandsFactory');
 const StatesFactory = require('./states/StatesFactory');

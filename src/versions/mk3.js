@@ -8,7 +8,7 @@ const {
   SENSOR_FUEL,
   SENSOR_TEMPERATURE,
   SENSOR_TERRAIN
-} = require('../../constants');
+} = require('../constants');
 
 module.exports = {
   version: 'mk3',
