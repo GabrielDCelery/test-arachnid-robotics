@@ -91,10 +91,16 @@ class App {
         amount
       });
 
-    const { fuel, temperature } = engines.getRequirements({
+    const { fuel, temperature, time } = engines.getRequirements({
       type: this.ai.selectEngine({ distance }),
       distance
     });
+
+    const bCanDoMoveInOneTick = this.ai.checkSpeed({ time });
+
+    if (!bCanDoMoveInOneTick) {
+      return this._processCommand(this.ai.generateFallbackCommand());
+    }
 
     const { bAllSensorsPassed, failedSensors } = this.ai.checkSensors({
       coordinates,
@@ -102,11 +108,13 @@ class App {
       fuel
     });
 
-    if (bAllSensorsPassed) {
-      return this._actionCommand({ coordinates, direction, fuel, temperature });
+    if (!bAllSensorsPassed) {
+      return this._processCommand(
+        this.ai.generateFallbackCommand(failedSensors)
+      );
     }
 
-    return this._processCommand(this.ai.generateFallbackCommand(failedSensors));
+    return this._actionCommand({ coordinates, direction, fuel, temperature });
   }
 
   processInput(inputString) {

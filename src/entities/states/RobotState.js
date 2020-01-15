@@ -29,7 +29,7 @@ class RobotState {
   }
 
   hasEngine(type) {
-    return Object.prototype.hasOwnProperty.call(this.engines, type);
+    return this.engines[type] === true;
   }
 
   setVersion(version) {

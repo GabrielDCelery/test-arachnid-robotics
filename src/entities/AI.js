@@ -37,6 +37,10 @@ class AI {
     return ENGINE_SPIDER_LEGS;
   }
 
+  checkSpeed({ time }) {
+    return time === 1;
+  }
+
   checkSensors({ coordinates, temperature, fuel }) {
     const failedSensors = [
       SENSOR_FUEL,
