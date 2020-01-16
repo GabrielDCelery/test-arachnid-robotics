@@ -4,7 +4,7 @@ const SensorInterface = require('./SensorInterface');
 class TemperatureSensor extends SensorInterface {
   _isSafe({ temperature }) {
     return (
-      temperature + this.state.get(STATE_ROBOT).getTemperature() <=
+      temperature + this.states.get(STATE_ROBOT).getTemperature() <=
       this.config.maxAllowedTemperature
     );
   }
@@ -12,7 +12,7 @@ class TemperatureSensor extends SensorInterface {
   getRecommendation() {
     return (
       this.config.maxAllowedTemperature -
-      this.state.get(STATE_ROBOT).getTemperature()
+      this.states.get(STATE_ROBOT).getTemperature()
     );
   }
 }

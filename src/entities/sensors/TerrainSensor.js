@@ -4,7 +4,7 @@ const SensorInterface = require('./SensorInterface');
 class TerrainSensor extends SensorInterface {
   _isSafe({ coordinates }) {
     return this.config['checkIfCoordinatesAreWithinGrid']
-      ? this.state
+      ? this.states
           .get(STATE_TERRAIN)
           .areCoordinatesInsideBoundaries(coordinates)
       : true;
