@@ -1,7 +1,7 @@
 class SensorInterface {
   constructor() {
     this.enabled = false;
-    this.robotState = null;
+    this.states = null;
     this.config = null;
   }
 
@@ -11,8 +11,8 @@ class SensorInterface {
     return this;
   }
 
-  linkWithStates(state) {
-    this.state = state;
+  linkWithStates(states) {
+    this.states = states;
 
     return this;
   }
