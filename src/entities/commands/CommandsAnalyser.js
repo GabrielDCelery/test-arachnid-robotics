@@ -35,8 +35,7 @@ class CommandsAnalyser {
 
       case COMMAND_MOVE_BACKWARDS: {
         const newDirection = graph.rotateVector({
-          x: direction.x,
-          y: direction.y,
+          direction,
           degrees: 180
         });
         const newCoordinates = graph.calculateNewCoordinatesTowardsDirection({
@@ -49,8 +48,7 @@ class CommandsAnalyser {
 
       case COMMAND_MOVE_LEFT: {
         const newDirection = graph.rotateVector({
-          x: direction.x,
-          y: direction.y,
+          direction,
           degrees: 90
         });
         const newCoordinates = graph.calculateNewCoordinatesTowardsDirection({
@@ -63,8 +61,7 @@ class CommandsAnalyser {
 
       case COMMAND_MOVE_RIGHT: {
         const newDirection = graph.rotateVector({
-          x: direction.x,
-          y: direction.y,
+          direction,
           degrees: -90
         });
         const newCoordinates = graph.calculateNewCoordinatesTowardsDirection({
@@ -77,8 +74,7 @@ class CommandsAnalyser {
 
       case COMMAND_TURN_LEFT: {
         const newDirection = graph.rotateVector({
-          x: direction.x,
-          y: direction.y,
+          direction,
           degrees: amount
         });
 
@@ -87,8 +83,7 @@ class CommandsAnalyser {
 
       case COMMAND_TURN_RIGHT: {
         const newDirection = graph.rotateVector({
-          x: direction.x,
-          y: direction.y,
+          direction,
           degrees: -1 * amount
         });
 
