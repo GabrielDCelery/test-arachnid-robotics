@@ -1,30 +1,45 @@
 import { IRobotConfiguration } from '../common/interfaces';
-import { Command, Engine, FuelTank, Sensor } from '../common/enums';
+import {
+  Command as CommandEnums,
+  Engine as EngineEnums,
+  FuelTank as FuelTankEnums,
+  Sensor as SensorEnums
+} from '../common/enums';
+
+const {
+  COMMAND_MOVE_FORWARDS,
+  COMMAND_MOVE_BACKWARDS,
+  COMMAND_MOVE_LEFT,
+  COMMAND_MOVE_RIGHT
+} = CommandEnums;
+const { ENGINE_SPIDER_LEGS } = EngineEnums;
+const { FUEL_TANK_NONE } = FuelTankEnums;
+const { SENSOR_FUEL, SENSOR_TEMPERATURE, SENSOR_TERRAIN } = SensorEnums;
 
 const config: IRobotConfiguration = {
   version: 'mk1',
-  engines: [Engine.ENGINE_SPIDER_LEGS],
-  fuelTank: FuelTank.FUEL_TANK_NONE,
+  engines: [ENGINE_SPIDER_LEGS],
+  fuelTank: FUEL_TANK_NONE,
   sensors: {
-    [Sensor.SENSOR_FUEL]: {
+    [SENSOR_FUEL]: {
       enabled: false,
       config: {}
     },
-    [Sensor.SENSOR_TEMPERATURE]: {
+    [SENSOR_TEMPERATURE]: {
       enabled: false,
       config: {}
     },
-    [Sensor.SENSOR_TERRAIN]: {
+    [SENSOR_TERRAIN]: {
       enabled: false,
       config: {}
     }
   },
   commandTransformations: {
-    F: [{ command: Command.COMMAND_MOVE_FORWARDS, amount: 1 }],
-    B: [{ command: Command.COMMAND_MOVE_BACKWARDS, amount: 1 }],
-    L: [{ command: Command.COMMAND_MOVE_LEFT, amount: 1 }],
-    R: [{ command: Command.COMMAND_MOVE_RIGHT, amount: 1 }],
-    xF: [{ command: Command.COMMAND_MOVE_FORWARDS, amount: 'x' }]
+    F: [{ command: COMMAND_MOVE_FORWARDS, amount: 1 }],
+    B: [{ command: COMMAND_MOVE_BACKWARDS, amount: 1 }],
+    L: [{ command: COMMAND_MOVE_LEFT, amount: 1 }],
+    R: [{ command: COMMAND_MOVE_RIGHT, amount: 1 }],
+    xF: [{ command: COMMAND_MOVE_FORWARDS, amount: 'x' }]
   }
 };
 

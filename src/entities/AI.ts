@@ -9,6 +9,10 @@ import {
 import StatesFactory from './states/StatesFactory';
 import SensorsFactory from './sensors/SensorsFactory';
 
+const { STATE_ROBOT } = StateEnums;
+const { STRING_ENGINES } = StringEnums;
+const { SENSOR_FUEL, SENSOR_TEMPERATURE, SENSOR_TERRAIN } = SensorEnums;
+
 interface IAI {
   setStates(states: StatesFactory): this;
   setSensors(sensors: SensorsFactory): this;
@@ -56,8 +60,8 @@ class AI implements IAI {
     if (
       1 < distance &&
       this.states
-        .get(StateEnums.STATE_ROBOT)
-        .get(StringEnums.STRING_ENGINES)
+        .get(STATE_ROBOT)
+        .get(STRING_ENGINES)
         .includes(EngineEnums.ENGINE_ROCKET)
     ) {
       return EngineEnums.ENGINE_ROCKET;
@@ -80,9 +84,9 @@ class AI implements IAI {
     fuel: number;
   }) {
     const failedSensors = [
-      SensorEnums.SENSOR_FUEL,
-      SensorEnums.SENSOR_TEMPERATURE,
-      SensorEnums.SENSOR_TERRAIN
+      SENSOR_FUEL,
+      SENSOR_TEMPERATURE,
+      SENSOR_TERRAIN
     ].filter(sensorType => {
       return (
         this.sensors

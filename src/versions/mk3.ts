@@ -1,22 +1,36 @@
 import { IRobotConfiguration } from '../common/interfaces';
-import { Command, Engine, FuelTank, Sensor } from '../common/enums';
+import {
+  Command as CommandEnums,
+  Engine as EngineEnums,
+  FuelTank as FuelTankEnums,
+  Sensor as SensorEnums
+} from '../common/enums';
+
+const {
+  COMMAND_MOVE_FORWARDS,
+  COMMAND_TURN_RIGHT,
+  COMMAND_TURN_LEFT
+} = CommandEnums;
+const { ENGINE_SPIDER_LEGS, ENGINE_ROCKET } = EngineEnums;
+const { FUEL_TANK_BASIC } = FuelTankEnums;
+const { SENSOR_FUEL, SENSOR_TEMPERATURE, SENSOR_TERRAIN } = SensorEnums;
 
 const config: IRobotConfiguration = {
   version: 'mk3',
-  engines: [Engine.ENGINE_SPIDER_LEGS, Engine.ENGINE_ROCKET],
-  fuelTank: FuelTank.FUEL_TANK_BASIC,
+  engines: [ENGINE_SPIDER_LEGS, ENGINE_ROCKET],
+  fuelTank: FUEL_TANK_BASIC,
   sensors: {
-    [Sensor.SENSOR_FUEL]: {
+    [SENSOR_FUEL]: {
       enabled: true,
       config: {}
     },
-    [Sensor.SENSOR_TEMPERATURE]: {
+    [SENSOR_TEMPERATURE]: {
       enabled: true,
       config: {
         maxAllowedTemperature: 5
       }
     },
-    [Sensor.SENSOR_TERRAIN]: {
+    [SENSOR_TERRAIN]: {
       enabled: true,
       config: {
         checkIfCoordinatesAreWithinGrid: false
@@ -24,14 +38,14 @@ const config: IRobotConfiguration = {
     }
   },
   commandTransformations: {
-    F: [{ command: Command.COMMAND_MOVE_FORWARDS, amount: 1 }],
+    F: [{ command: COMMAND_MOVE_FORWARDS, amount: 1 }],
     B: [
-      { command: Command.COMMAND_TURN_RIGHT, amount: 180 },
-      { command: Command.COMMAND_MOVE_FORWARDS, amount: 1 }
+      { command: COMMAND_TURN_RIGHT, amount: 180 },
+      { command: COMMAND_MOVE_FORWARDS, amount: 1 }
     ],
-    L: [{ command: Command.COMMAND_TURN_LEFT, amount: 90 }],
-    R: [{ command: Command.COMMAND_TURN_RIGHT, amount: 90 }],
-    xF: [{ command: Command.COMMAND_MOVE_FORWARDS, amount: 'x' }]
+    L: [{ command: COMMAND_TURN_LEFT, amount: 90 }],
+    R: [{ command: COMMAND_TURN_RIGHT, amount: 90 }],
+    xF: [{ command: COMMAND_MOVE_FORWARDS, amount: 'x' }]
   }
 };
 

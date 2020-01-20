@@ -5,6 +5,8 @@ import {
   Sensor as SensorEnums
 } from '../enums';
 
+const { SENSOR_FUEL, SENSOR_TEMPERATURE, SENSOR_TERRAIN } = SensorEnums;
+
 export interface ISensorFuel {
   enabled: boolean;
   config: {};
@@ -43,9 +45,9 @@ export interface IRobotConfiguration {
   engines: EngineEnums[];
   fuelTank: FuelTankEnums;
   sensors: {
-    [SensorEnums.SENSOR_FUEL]: ISensorFuel;
-    [SensorEnums.SENSOR_TEMPERATURE]: ISensorTemperature;
-    [SensorEnums.SENSOR_TERRAIN]: ISensorTerrain;
+    [SENSOR_FUEL]: ISensorFuel;
+    [SENSOR_TEMPERATURE]: ISensorTemperature;
+    [SENSOR_TERRAIN]: ISensorTerrain;
   };
   commandTransformations: ICommandTransformations;
 }
