@@ -29,6 +29,15 @@ export interface ICommandConfig {
   amount: number | string;
 }
 
+export type ICommandTransformations = {
+  [key: string]: any;
+  F: ICommandConfig[];
+  B: ICommandConfig[];
+  L: ICommandConfig[];
+  R: ICommandConfig[];
+  xF: ICommandConfig[];
+};
+
 export interface IRobotConfiguration {
   version: string;
   engines: EngineEnums[];
@@ -38,11 +47,5 @@ export interface IRobotConfiguration {
     [SensorEnums.SENSOR_TEMPERATURE]: ISensorTemperature;
     [SensorEnums.SENSOR_TERRAIN]: ISensorTerrain;
   };
-  commandTransformations: {
-    F: ICommandConfig[];
-    B: ICommandConfig[];
-    L: ICommandConfig[];
-    R: ICommandConfig[];
-    xF: ICommandConfig[];
-  };
+  commandTransformations: ICommandTransformations;
 }

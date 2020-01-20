@@ -1,20 +1,22 @@
 import { State as StateEnums } from '../../common/enums';
 import State from './State';
 
+const { STATE_ROBOT, STATE_TERRAIN } = StateEnums;
+
 interface IStatesFactory {
   get(stateType: StateEnums): any;
 }
 
 class StatesFactory implements IStatesFactory {
   public states: {
-    [StateEnums.STATE_ROBOT]: State;
-    [StateEnums.STATE_TERRAIN]: State;
+    [STATE_ROBOT]: State;
+    [STATE_TERRAIN]: State;
   };
 
   constructor() {
     this.states = {
-      [StateEnums.STATE_ROBOT]: new State(),
-      [StateEnums.STATE_TERRAIN]: new State()
+      [STATE_ROBOT]: new State(),
+      [STATE_TERRAIN]: new State()
     };
   }
 

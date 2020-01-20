@@ -1,4 +1,4 @@
-const run = require('../src/run');
+const run = require('../dist/run');
 
 const result1 = run({
   terrain: {

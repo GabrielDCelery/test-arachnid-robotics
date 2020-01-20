@@ -20,4 +20,4 @@ const run = (processConfig: ProcessConfig): ICoordinates => {
     .getCoordinates();
 };
 
-export default run;
+module.exports = run;

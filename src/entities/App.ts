@@ -1,4 +1,3 @@
-const CommandsFactory = require('./commands/CommandsFactory');
 import versions from '../versions';
 import AI from './AI';
 import StatesFactory from './states/StatesFactory';
@@ -6,7 +5,6 @@ import SensorsFactory from './sensors/SensorsFactory';
 import { ISize, ICoordinates, IVector } from '../common/interfaces';
 import {
   Command as CommandEnums,
-  Commands as CommandsEnums,
   Sensor as SensorEnums,
   State as StateEnums,
   String as StringEnums
@@ -15,8 +13,9 @@ import {
   engines as helperEngines,
   fuelTanks as helperFuelTanks
 } from '../helpers';
+import CommandsAnalyser from './commands/CommandsAnalyser';
+import CommandsInterpreter from './commands/CommandsInterpreter';
 
-const { COMMANDS_ANALYSER, COMMANDS_INTERPRETER } = CommandsEnums;
 const { STATE_ROBOT, STATE_TERRAIN } = StateEnums;
 const { SENSOR_FUEL, SENSOR_TEMPERATURE, SENSOR_TERRAIN } = SensorEnums;
 const {
@@ -57,13 +56,15 @@ class App implements IApp {
   private ai: AI;
   private states: StatesFactory;
   private sensors: SensorsFactory;
-  private commands: any;
+  private commandsAnalyzer: CommandsAnalyser;
+  private commandsInterpreter: CommandsInterpreter;
 
   constructor() {
     this.ai = AI.createInstance();
     this.states = StatesFactory.createInstance();
     this.sensors = SensorsFactory.createInstance();
-    this.commands = CommandsFactory.createInstance();
+    this.commandsAnalyzer = new CommandsAnalyser();
+    this.commandsInterpreter = new CommandsInterpreter();
   }
 
   static createInstance() {
@@ -100,14 +101,16 @@ class App implements IApp {
   }): any {
     const robotState = this.states.get(STATE_ROBOT);
 
-    const { coordinates, direction, distance } = this.commands
-      .get(COMMANDS_ANALYSER)
-      .getDesiredPosition({
-        coordinates: robotState.get(STRING_COORDINATES),
-        direction: robotState.get(STRING_DIRECTION),
-        command,
-        amount
-      });
+    const {
+      coordinates,
+      direction,
+      distance
+    } = this.commandsAnalyzer.getDesiredPosition({
+      coordinates: robotState.get(STRING_COORDINATES),
+      direction: robotState.get(STRING_DIRECTION),
+      command,
+      amount
+    });
 
     const { fuel, temperature, time } = helperEngines.getRequirements({
       type: this.ai.selectEngine({ distance }),
@@ -161,9 +164,9 @@ class App implements IApp {
 
     this.ai.setStates(this.states).setSensors(this.sensors);
 
-    this.commands
-      .get(COMMANDS_INTERPRETER)
-      .setTransformations(version['commandTransformations']);
+    this.commandsInterpreter.setTransformations(
+      version['commandTransformations']
+    );
 
     return this;
   }
@@ -186,14 +189,12 @@ class App implements IApp {
     this.states
       .get(STATE_ROBOT)
       .set(STRING_COORDINATES, { x: parseInt(x), y: parseInt(y) })
-      .set(STRING_DIRECTION, {});
+      .set(STRING_DIRECTION, { x: 0, y: 1 });
 
-    const commandsInterpreter = this.commands.get(COMMANDS_INTERPRETER);
+    this.commandsInterpreter.setInputSequence(commandInputSequence);
 
-    commandsInterpreter.setInputSequence(commandInputSequence);
-
-    while (commandsInterpreter.hasNotFinishedProcessing()) {
-      const commands = commandsInterpreter.getNextCommand();
+    while (this.commandsInterpreter.hasNotFinishedProcessing()) {
+      const commands = this.commandsInterpreter.getNextCommand();
 
       commands.forEach(
         ({ command, amount }: { command: CommandEnums; amount: number }) => {

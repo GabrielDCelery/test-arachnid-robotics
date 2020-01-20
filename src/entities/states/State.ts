@@ -1,5 +1,15 @@
 import { String as StringEnums } from '../../common/enums';
 
+const {
+  STRING_COORDINATES,
+  STRING_DIRECTION,
+  STRING_ENGINES,
+  STRING_FUEL,
+  STRING_SIZE,
+  STRING_TEMPERATURE,
+  STRING_VERSION
+} = StringEnums;
+
 interface IState {
   get(what: StringEnums): any;
   has(what: StringEnums): boolean;
@@ -8,8 +18,26 @@ interface IState {
 
 class State implements IState {
   private whats: {
-    [key in StringEnums]: any;
+    [StringEnums.STRING_COORDINATES]: any;
+    [STRING_DIRECTION]: any;
+    [STRING_ENGINES]: any;
+    [STRING_FUEL]: any;
+    [STRING_SIZE]: any;
+    [STRING_TEMPERATURE]: any;
+    [STRING_VERSION]: any;
   };
+
+  constructor() {
+    this.whats = {
+      [STRING_COORDINATES]: null,
+      [STRING_DIRECTION]: null,
+      [STRING_ENGINES]: null,
+      [STRING_FUEL]: null,
+      [STRING_SIZE]: null,
+      [STRING_TEMPERATURE]: null,
+      [STRING_VERSION]: null
+    };
+  }
 
   get(what: StringEnums) {
     return this.whats[what];

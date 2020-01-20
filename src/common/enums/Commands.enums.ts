@@ -1,4 +1,0 @@
-export enum Commands {
-  COMMANDS_ANALYSER,
-  COMMANDS_INTERPRETER
-}

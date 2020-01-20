@@ -3,22 +3,24 @@ import FuelSensor from './FuelSensor';
 import TemperatureSensor from './TemperatureSensor';
 import TerrainSensor from './TerrainSensor';
 
+const { SENSOR_FUEL, SENSOR_TEMPERATURE, SENSOR_TERRAIN } = SensorEnums;
+
 interface ISensorsFactory {
   get(stateType: SensorEnums): FuelSensor | TemperatureSensor | TerrainSensor;
 }
 
 class SensorsFactory implements ISensorsFactory {
   private sensors: {
-    [SensorEnums.SENSOR_FUEL]: FuelSensor;
-    [SensorEnums.SENSOR_TEMPERATURE]: TemperatureSensor;
-    [SensorEnums.SENSOR_TERRAIN]: TerrainSensor;
+    [SENSOR_FUEL]: FuelSensor;
+    [SENSOR_TEMPERATURE]: TemperatureSensor;
+    [SENSOR_TERRAIN]: TerrainSensor;
   };
 
   constructor() {
     this.sensors = {
-      [SensorEnums.SENSOR_FUEL]: new FuelSensor(),
-      [SensorEnums.SENSOR_TEMPERATURE]: new TemperatureSensor(),
-      [SensorEnums.SENSOR_TERRAIN]: new TerrainSensor()
+      [SENSOR_FUEL]: new FuelSensor(),
+      [SENSOR_TEMPERATURE]: new TemperatureSensor(),
+      [SENSOR_TERRAIN]: new TerrainSensor()
     };
   }
 
