@@ -1,5 +1,7 @@
 run-tests:
 	npm run test
+compile:
+	npx tsc
 mk1:
 	node ./dev/mk1
 mk2:

@@ -1,4 +1,0 @@
-module.exports = {
-  STATE_ROBOT: 'STATE_ROBOT',
-  STATE_TERRAIN: 'STATE_TERRAIN'
-};

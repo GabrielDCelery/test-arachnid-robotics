@@ -1,0 +1,5 @@
+export enum Sensor {
+  SENSOR_FUEL,
+  SENSOR_TEMPERATURE,
+  SENSOR_TERRAIN
+}

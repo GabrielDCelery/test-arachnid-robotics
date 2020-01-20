@@ -24,7 +24,7 @@ A robot spider has the following `sections` that control its behaviour
 | ----------------- | ---------------------------------------------------------- |
 | dev               | scripts for quick validation / TODO - add real tests later |
 | src/configs       | configuration files                                        |
-| src/constants     | Constants definitions                                      |
+| src/common        | Commonly shared enums and interfaces                       |
 | src/entities      | Entity classes for the application                         |
 | src/run           | entrypoint for running the application                     |
 | Makefile          | Entrypoint scripts                                         |
@@ -37,6 +37,14 @@ run the following commands
 
 ```
 npm install
+```
+
+### to compile the code from typescript to javascript
+
+Everything gets compiled to the `dist` folder
+
+```
+make compile
 ```
 
 ### to run Part 1
